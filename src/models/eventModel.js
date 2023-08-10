@@ -27,6 +27,10 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter an url'],
     },
+
+    category: {
+        type: String
+    }
 });
 
 const Event = mongoose.models.events || mongoose.model('events', eventSchema);

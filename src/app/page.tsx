@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react'
-import Showcase from "@/components/events_showcase/events_showcase.component";
+import Showcase from "@/components/events_showcase/events_showcase.component.jsx";
 import Navbar from "@/components/navbar";
 import { useGlobalContext } from './context/user.context';
 import axios from 'axios';

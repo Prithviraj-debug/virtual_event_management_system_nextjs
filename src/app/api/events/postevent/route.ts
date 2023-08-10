@@ -7,7 +7,7 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqbody = await request.json();
-        const {postedby, eventname, organizer, date, time, url} = reqbody;
+        const {postedby, eventname, organizer, date, time, url, category} = reqbody;
         console.log(reqbody);
 
         // create new Event
@@ -17,7 +17,8 @@ export async function POST(request: NextRequest) {
             organizer,
             date,
             time,
-            url
+            url,
+            category
         });
 
         // save event and return response

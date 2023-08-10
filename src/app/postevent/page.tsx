@@ -22,6 +22,7 @@ export default function PostEvent() {
         date: "",
         time: "",        
         url: "",
+        category: ""
     });
 
     
@@ -40,7 +41,8 @@ export default function PostEvent() {
     }
 
     return (
-        <div className="sign flex items-center justify-center min-h-screen py-2 bg-gray-900">
+        <div className="sign flex flex-col items-center justify-center min-h-screen py-2 bg-gray-900">
+            <h1 className="text-2xl mb-4 font-bold capitalize">Tell us about your event!</h1>
             <Link href="/">
                 <img src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
             </Link>
@@ -52,7 +54,9 @@ export default function PostEvent() {
                         onChange={(e) => setEvent({...event, eventname: e.target.value})}
                         placeholder="Eventname"
                         className="input p-3 w-fit max-w-xs"
+                        required
                     />
+
                     <input 
                         id="organizer"
                         type="text"
@@ -60,6 +64,7 @@ export default function PostEvent() {
                         onChange={(e) => setEvent({...event, organizer: e.target.value})}
                         placeholder="Organizer"
                         className="input p-3 w-fit max-w-xs"
+                        required
                     />
 
                     <input 
@@ -68,6 +73,7 @@ export default function PostEvent() {
                         value={event.date} 
                         onChange={(e) => setEvent({...event, date: e.target.value})}
                         className="input p-3 w-fit max-w-xs"
+                        required
                     /> 
 
                     <input 
@@ -76,6 +82,7 @@ export default function PostEvent() {
                         value={event.time} 
                         onChange={(e) => setEvent({...event, time: e.target.value})}
                         className="input p-3 w-fit max-w-xs"
+                        required
                     />  
 
                     <input 
@@ -85,7 +92,18 @@ export default function PostEvent() {
                         onChange={(e) => setEvent({...event, url: e.target.value})}
                         placeholder="Paste the event URL here.."
                         className="input p-3 w-fit max-w-xs"
+                        required
                     />  
+
+                    <input 
+                        id="category"
+                        type="text"
+                        value={event.category} 
+                        onChange={(e) => setEvent({...event, category: e.target.value})}
+                        placeholder="Category (e.g. Tech, business..."
+                        className="input p-3 w-fit max-w-xs"
+                        required
+                    />
 
                     <button
                         onClick={onPostHandler}
