@@ -5,6 +5,7 @@ import Showcase from "@/components/events_showcase/events_showcase.component";
 import Navbar from "@/components/navbar";
 import { useGlobalContext } from './context/user.context';
 import axios from 'axios';
+import Image from 'next/image';
 
 export default function Home() {
   const { userId, setUserId, username, setUsername, email, setEmail } = useGlobalContext();
@@ -35,7 +36,7 @@ export default function Home() {
 
 useEffect(() => {
   getUserDetail();
-}, [])
+})
 
   useEffect(() => {
       setTimeout(() => {
@@ -47,7 +48,7 @@ useEffect(() => {
     <>
     <div className={`bg-white text-black flex flex-col items-center ${loading ? 'hidden' : 'block'}`}>
       <Navbar />
-      <img src="/event.jpg" />
+      <Image src="/event.jpg" alt='banner' />
       <Showcase />
 
       </div>

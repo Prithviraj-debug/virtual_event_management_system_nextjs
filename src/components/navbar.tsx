@@ -2,6 +2,7 @@ import { useGlobalContext } from "@/app/context/user.context";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Navbar() {
     const router = useRouter();
@@ -35,7 +36,7 @@ export default function Navbar() {
                         <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
-                    <img src="/avatar.png" />
+                    <Image src="/avatar.png" alt="avatar" />
                     </div>
                 </label>
                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52">

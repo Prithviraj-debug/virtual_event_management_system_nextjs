@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 export default function Card({ event }: any) {
     return (
         <div className="card-contianer" key={event._id}>
             <div className="card-container">
-                <img
+                <Image
                     src="/eventcard.jpg"
                     alt='cardimg'
                 />
