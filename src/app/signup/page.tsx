@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Image from "next/image";
 
 export default function SigupPage() {
     const router = useRouter();
@@ -40,7 +41,7 @@ export default function SigupPage() {
     return (
         <div className="sign flex items-center justify-center min-h-screen py-2 bg-gray-900">
             <Link href="/">
-                <img src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
+                <Image src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
             </Link>
             <div className="w-fit flex flex-col gap-3">
                     <input 

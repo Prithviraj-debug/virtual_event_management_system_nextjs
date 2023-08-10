@@ -73,7 +73,7 @@ export default function LoginPage() {
                         className={`btn btn-outline mt-2 ${buttonDisabled ? "btn-disabled" : ""}`}
                     >Login</button>
 
-                <p className="mt-5 text-sm text-center">Don't have an account? <Link href="/signup" className="cursor-pointer">Sign Up</Link></p>
+                <p className="mt-5 text-sm text-center">Dont have an account? <Link href="/signup" className="cursor-pointer">Sign Up</Link></p>
             </div>
 
             {
