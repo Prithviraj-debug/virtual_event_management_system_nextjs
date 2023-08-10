@@ -2,13 +2,12 @@ import { useGlobalContext } from "@/app/context/user.context";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function Navbar() {
     const router = useRouter();
-    const { userId } = useGlobalContext();
-    console.log(userId)
 
+    const { username } = useGlobalContext();
+    console.log(username)
     const logout = async () => {
         try {
             const response = await axios.get("/api/users/logout");
@@ -25,7 +24,7 @@ export default function Navbar() {
                 <a className="normal-case text-xl cursor-pointer">VEM</a>
             </div>
                 {
-                    !userId ? (
+                    !username ? (
                         <div className="flex justify-between gap-6">
                             <Link href='/login' className="cursor-pointer">Sign in</Link>
                             <Link href='/signup' className="btn btn-outline">Sign up</Link>
@@ -36,7 +35,7 @@ export default function Navbar() {
                         <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
-                    <Image src="/avatar.png" alt="avatar" />
+                    <img src="/avatar.png" />
                     </div>
                 </label>
                 <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52">

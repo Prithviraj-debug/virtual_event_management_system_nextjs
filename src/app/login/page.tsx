@@ -49,7 +49,7 @@ export default function LoginPage() {
     return (
         <div className="flex items-center justify-center min-h-screen py-2 bg-gray-900">
             <Link href="/">
-                <Image src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
+                <img src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
             </Link>
             <div className="w-fit flex flex-col gap-3">
                     <input 

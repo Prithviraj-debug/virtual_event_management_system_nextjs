@@ -21,7 +21,7 @@ export default function Showcase() {
 
       useEffect(() => {
         getAllEvents();
-      })
+      }, [])
     return (
         <div className='flex flex-col items-center'>
             <h1 className='font-bold text-3xl my-8'>Upcoming Events...</h1>
@@ -30,8 +30,8 @@ export default function Showcase() {
                 </div>
             <div className="card-list">
                 {
-                    eventsData.map((event) => 
-                        <Card event={event} key={event} />
+                    eventsData.map((event, i) => 
+                        <Card event={event} key={i} />
                     )
                 }
             </div>

@@ -5,7 +5,6 @@ import Showcase from "@/components/events_showcase/events_showcase.component";
 import Navbar from "@/components/navbar";
 import { useGlobalContext } from './context/user.context';
 import axios from 'axios';
-import Image from 'next/image';
 
 export default function Home() {
   const { userId, setUserId, username, setUsername, email, setEmail } = useGlobalContext();
@@ -23,6 +22,7 @@ export default function Home() {
         setIsLoading(true);
         const res = await axios.get("/api/users/user")
         setData(res.data.data);
+        console.log(data)
         setUserId(data._id)
         setUsername(data.username)
         setEmail(data.email)
@@ -36,7 +36,7 @@ export default function Home() {
 
 useEffect(() => {
   getUserDetail();
-})
+}, [loading])
 
   useEffect(() => {
       setTimeout(() => {
@@ -48,7 +48,7 @@ useEffect(() => {
     <>
     <div className={`bg-white text-black flex flex-col items-center ${loading ? 'hidden' : 'block'}`}>
       <Navbar />
-      <Image src="/event.jpg" alt='banner' />
+      <img src="/event.jpg" alt='banner' />
       <Showcase />
 
       </div>
