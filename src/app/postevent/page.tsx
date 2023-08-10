@@ -5,15 +5,14 @@ import { useState } from 'react';
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "../context/user.context";
-import Image from "next/image";
 
 export default function PostEvent() {
     const router = useRouter();
-    const {username} = useGlobalContext();
+    const {userId} = useGlobalContext();
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
-    console.log(username)
+    console.log(userId)
 
     const [event, setEvent] = useState({
         postedby: "",
@@ -29,7 +28,7 @@ export default function PostEvent() {
     const onPostHandler = async () => {
         try {
             setLoading(true);
-            event.postedby = username;
+            event.postedby = userId;
             const response = await axios.post("/api/events/postevent", event);
             console.log("succss", response.data);
             router.push("/");
