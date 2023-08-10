@@ -15,6 +15,7 @@ export default function ProfilePage() {
         username: "",
         email: "",
     });
+    
 
     const [eventData, setEventData] = useState([]);
     const logout = async () => {
@@ -43,6 +44,18 @@ export default function ProfilePage() {
         }
     }
 
+    const deleteEvent = async (event) => {
+        try {
+            setIsLoading(true);
+            const res = await axios.delete("/api/events/deleteevent", event);
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setIsLoading(false);
+        }
+    }
 
     useEffect(() => {
         getUserDetail();
@@ -68,29 +81,35 @@ export default function ProfilePage() {
             <div className={`${isLoading ? 'hidden' : 'block'} flex flex-col p-6 w-full`}>
                 <h1 className="font-bold text-2xl mb-4">Manage Events</h1>
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra">
-                        <thead>
-                            <tr>
-                                <th>Events</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                         {
                             eventData.map((event, i) => (
-                                <tr key={event._id}>
-                                    <td className="w-full">
+                                <tr key={event._id} onClick={()=>window.my_modal_2.showModal()}>
+                                    
+                                    <td className="bg-slate-500 w-full text-white font-semibold rounded-lg p-4 cursor-pointer hover:opacity-80">
                                         {event.eventname}
                                     </td>
                                     <td className="flex gap-5">
-                                        <FiEdit cursor="pointer" className="text-white" size={20} />
-                                        <FiTrash2 cursor="pointer" className="text-white" size={20} />
                                     </td>
+                                    <dialog id="my_modal_2" className="modal">
+                                        <form method="dialog" className="modal-box">
+                                            <h3 className="font-bold text-2xl">{event.eventname}</h3>
+                                            <p className="mt-3 ">Organized by: {event.organizer}</p>
+                                            <p className="mt-3 ">Date: {event.date} at {event.time}</p>
+                                            <p className="mt-3 ">Category(s): {event.category}</p>
+                                            <div className="flex w-full justify-between items-center">
+                                            <FiEdit cursor="pointer" className="text-white" size={30} />
+                                            <FiTrash2 cursor="pointer" className="text-red-600 mt-4" size={30} onClick={() => deleteEvent(event._id)} />
+                                            </div>  
+
+                                            <p className="py-4">Press ESC key or click outside to close</p>
+                                        </form>
+                                        <form method="dialog" className="modal-backdrop">
+                                            <button>close</button>
+                                        </form>
+                                    </dialog>
                                 </tr>
                             ))
                         }
-                        </tbody>
-                    </table>
                 </div>
             </div>
                 {isLoading && (

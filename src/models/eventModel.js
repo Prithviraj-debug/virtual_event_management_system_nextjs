@@ -30,6 +30,10 @@ const eventSchema = new mongoose.Schema({
 
     category: {
         type: String
+    },
+    
+    rsvp_users: {
+        type: []
     }
 });
 

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Card from './card.component';
 import './events_showcase.styles.css';
 import axios from 'axios';
