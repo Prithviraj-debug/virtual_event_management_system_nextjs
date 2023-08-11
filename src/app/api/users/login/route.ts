@@ -42,7 +42,6 @@ export async function POST(request: NextRequest) {
             httpOnly: true,
         });
 
-        response.cookies.get('token') ? console.log(true) : console.log(false);
         return response;
 
     } catch (error: any) {

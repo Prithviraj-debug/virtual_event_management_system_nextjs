@@ -3,7 +3,6 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Image from "next/image";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -28,8 +27,6 @@ export default function LoginPage() {
             console.log(response.data)
             resetFields();
             router.push("/");
-            // setTimeout(() => {
-            // }, 3000);
         } catch (error: any) {
             console.log(error.message);
             resetFields();

@@ -1,14 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import Card from './card.component';
 import './events_showcase.styles.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useGlobalContext } from '@/app/context/user.context';
 
 export default function Showcase() {
-    const {eventAdded} = useGlobalContext();
+    const [reloadEvents, setReloadEvents] = useState(false);
     const [eventsData, setEventsData] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [searchField, setSearchField] = useState('');
@@ -21,12 +19,13 @@ export default function Showcase() {
           console.log("events", eventsData);
         } catch (error) {
           console.log(error)
+        } finally {
         }
       }
 
       useEffect(() => {
         getAllEvents();
-      }, [eventAdded])
+      }, [reloadEvents])
 
       useEffect(() => {
         const newFilteredEvents = eventsData.filter((event) => {
@@ -43,7 +42,10 @@ export default function Showcase() {
 
     return (
         <div className='flex flex-col items-center'>
+          <div>
             <h1 className='font-bold text-3xl my-8'>Upcoming Events...</h1>
+            <button className='btn' onClick={() => setReloadEvents(!reloadEvents)}>Reload</button>
+          </div>
             <div className="inline form-control mb-6">
                     <input type="text" placeholder="Search by title or category" className="input input-bordered w-fit md:w-auto bg-white text-black placeholder:text-gray-900 ml-2 text-sm" onChange={onSearchChange} />
 

@@ -56,8 +56,8 @@ export default function ProfilePage() {
                 <div>
 
                 <h1 className="font-bold text-2xl mb-4">Profile</h1>
-                <p>Username: {username}</p>
-                <p>Email: {email}</p>
+                <p>Username: {data.username}</p>
+                <p>Email: {data.email}</p>
                 </div>
                     <button
                     onClick={logout}
