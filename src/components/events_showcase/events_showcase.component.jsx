@@ -15,6 +15,7 @@ export default function Showcase() {
     const getAllEvents = async () => {
         try {
           const res = await axios.get("/api/events/getevents");
+          console.log("res: ", res)
           setEventsData(res.data.data)
           console.log("events", eventsData);
         } catch (error) {
