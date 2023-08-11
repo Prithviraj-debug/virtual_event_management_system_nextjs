@@ -8,7 +8,7 @@ import { useGlobalContext } from "../context/user.context";
 
 export default function PostEvent() {
     const router = useRouter();
-    const {userId} = useGlobalContext();
+    const {userId, eventAdded, setEventAdded} = useGlobalContext();
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -30,6 +30,7 @@ export default function PostEvent() {
             setLoading(true);
             event.postedby = userId;
             const response = await axios.post("/api/events/postevent", event);
+            setEventAdded(event.eventname)
             console.log("succss", response.data);
             router.push("/");
         } catch (error: any) {

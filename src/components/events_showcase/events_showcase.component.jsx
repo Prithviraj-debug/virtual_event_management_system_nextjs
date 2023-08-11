@@ -5,9 +5,10 @@ import Card from './card.component';
 import './events_showcase.styles.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useGlobalContext } from '@/app/context/user.context';
 
 export default function Showcase() {
-
+    const {eventAdded} = useGlobalContext();
     const [eventsData, setEventsData] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [searchField, setSearchField] = useState('');
@@ -25,7 +26,7 @@ export default function Showcase() {
 
       useEffect(() => {
         getAllEvents();
-      })
+      }, [eventAdded])
 
       useEffect(() => {
         const newFilteredEvents = eventsData.filter((event) => {
