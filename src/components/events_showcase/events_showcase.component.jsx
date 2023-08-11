@@ -33,7 +33,7 @@ export default function Showcase() {
         });
     
         setFilteredEvents(newFilteredEvents);
-      }, [eventsData, searchField])
+      }, [eventsData, searchField, reloadEvents])
 
       const onSearchChange = (event) => {
         const searchFieldString = event.target.value.toLocaleLowerCase();
