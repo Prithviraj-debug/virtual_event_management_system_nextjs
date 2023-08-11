@@ -32,13 +32,13 @@ export default function ProfileEvent ({ event }: any) {
                 {
                     event.rsvp_users.length>0 ? (
                         <div>
-                        <h2 className="font-bold">RSVP'd Users</h2>
+                        <h2 className="font-bold">RSVPd Users</h2>
                         {event.rsvp_users.map((user: any) => (
                             <p>{user}</p>
                         ))}
             </div>
                     ) : (
-                        <p>No users RSVP'd</p>
+                        <p>No users RSVPd</p>
                     )
                 }
         </tr>
