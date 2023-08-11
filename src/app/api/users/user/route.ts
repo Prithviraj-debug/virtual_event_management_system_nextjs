@@ -9,6 +9,9 @@ export async function GET(request: NextRequest) {
     try {
         const userID = await getDataFromToken(request);
         const user = await User.findOne({_id: userID}).select("-password");
+        if(!user) {
+            return
+        }
         return NextResponse.json({
             message: "User found",
             data: user

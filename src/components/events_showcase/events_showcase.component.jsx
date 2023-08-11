@@ -25,7 +25,7 @@ export default function Showcase() {
 
       useEffect(() => {
         getAllEvents();
-      }, [])
+      })
 
       useEffect(() => {
         const newFilteredEvents = eventsData.filter((event) => {
