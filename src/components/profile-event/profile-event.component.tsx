@@ -34,7 +34,7 @@ export default function ProfileEvent ({ event }: any) {
                         <div>
                         <h2 className="font-bold">RSVPd Users</h2>
                         {event.rsvp_users.map((user: any) => (
-                            <p>{user}</p>
+                            <p key={event._id}>{user}</p>
                         ))}
             </div>
                     ) : (
