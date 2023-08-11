@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/user.context";
-import { FiEdit, FiTrash2 } from 'react-icons/fi'
+import ProfileEvent from "@/components/profile-event/profile-event.component";
 
 export default function ProfilePage() {
     const router = useRouter();
@@ -44,18 +44,7 @@ export default function ProfilePage() {
         }
     }
 
-    const deleteEvent = async (event) => {
-        try {
-            setIsLoading(true);
-            const res = await axios.delete("/api/events/deleteevent", event);
-            console.log(res);
-        } catch (error) {
-            console.log(error);
-        }
-        finally {
-            setIsLoading(false);
-        }
-    }
+    
 
     useEffect(() => {
         getUserDetail();
@@ -83,31 +72,7 @@ export default function ProfilePage() {
                 <div className="overflow-x-auto">
                         {
                             eventData.map((event, i) => (
-                                <tr key={event._id} onClick={()=>window.my_modal_2.showModal()}>
-                                    
-                                    <td className="bg-slate-500 w-full text-white font-semibold rounded-lg p-4 cursor-pointer hover:opacity-80">
-                                        {event.eventname}
-                                    </td>
-                                    <td className="flex gap-5">
-                                    </td>
-                                    <dialog id="my_modal_2" className="modal">
-                                        <form method="dialog" className="modal-box">
-                                            <h3 className="font-bold text-2xl">{event.eventname}</h3>
-                                            <p className="mt-3 ">Organized by: {event.organizer}</p>
-                                            <p className="mt-3 ">Date: {event.date} at {event.time}</p>
-                                            <p className="mt-3 ">Category(s): {event.category}</p>
-                                            <div className="flex w-full justify-between items-center">
-                                            <FiEdit cursor="pointer" className="text-white" size={30} />
-                                            <FiTrash2 cursor="pointer" className="text-red-600 mt-4" size={30} onClick={() => deleteEvent(event._id)} />
-                                            </div>  
-
-                                            <p className="py-4">Press ESC key or click outside to close</p>
-                                        </form>
-                                        <form method="dialog" className="modal-backdrop">
-                                            <button>close</button>
-                                        </form>
-                                    </dialog>
-                                </tr>
+                                <ProfileEvent event={event} key={i} />
                             ))
                         }
                 </div>

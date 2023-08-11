@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Event from "@/models/userModel";
+import Event from "@/models/eventModel";
 import { connect } from "@/dbConfig/dbConfig";
 
 connect();
@@ -7,9 +7,10 @@ connect();
 export async function DELETE(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { event } = reqBody;
+        const { _id } = reqBody;
 
-        const eventDeleted = await Event.deleteOne({_id: event});
+        console.log(reqBody)
+        const eventDeleted = await Event.deleteOne({_id: _id});
         return NextResponse.json({
             message: "Event deleted",
             data: eventDeleted

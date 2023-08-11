@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function Card({ event }: any) {
     const { userId, email } = useGlobalContext();
     const data = {
-        userId,
-        email
+        eventId: event._id,
+        email: email
     }
 
     const rsvpHandle = async () => {
