@@ -11,6 +11,8 @@ export default function Showcase() {
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [searchField, setSearchField] = useState('');
 
+    eventsData.reverse();
+
     const getAllEvents = async () => {
         try {
           const res = await axios.get("/api/events/getevents");
