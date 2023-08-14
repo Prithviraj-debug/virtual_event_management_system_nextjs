@@ -4,19 +4,14 @@ import Link from "next/link"
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useGlobalContext } from "../../context/user.context";
 
 export default function PostEvent({params}: any) {
     const router = useRouter();
-    const {userId, eventAdded, setEventAdded} = useGlobalContext();
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    const eventId = {
-        id: params.id
-    }
 
     const [event, setEvent] = useState({
-        postedby: "",
+        id: params.id,
         eventname: "",
         organizer: "",
         date: "",
@@ -26,11 +21,12 @@ export default function PostEvent({params}: any) {
     });
 
     
-    const getCurrentEventDetails = async () => {
+    const updateEventDetails = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`/api/events/event?id=${eventId.id}`);
+            const response = await axios.put("/api/events/updateevent", event);
             console.log("succss", response.data);
+            router.push('/')
         } catch (error: any) {
             console.log(error.message);
         } finally {
@@ -38,13 +34,9 @@ export default function PostEvent({params}: any) {
         }
     }
 
-    useEffect(() => {
-        getCurrentEventDetails();
-    }, [])
-
     return (
         <div className="sign flex flex-col items-center justify-center min-h-screen py-2 bg-gray-900">
-            <h1 className="text-2xl mb-4 font-bold capitalize">Edit your event! {eventId.id}</h1>
+            <h1 className="text-2xl mb-4 font-bold capitalize">Edit your event! {params.id}</h1>
             <Link href="/">
                 <img src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
             </Link>
@@ -108,11 +100,14 @@ export default function PostEvent({params}: any) {
                     />
 
                     <button
-                        // onClick={onPostHandler}
+                        onClick={updateEventDetails}
                         className={`btn btn-outline mt-2 ${buttonDisabled ? "btn-disabled" : ""}`}
-                    >Post</button>
+                    >Update</button>
 
                 </div>
+                {loading && (
+                    <span className="loading loading-infinity loading-lg absolute"></span>
+                )}
         </div>
     )
 }

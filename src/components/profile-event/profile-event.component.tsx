@@ -1,13 +1,23 @@
+"use client";
+
 import Link from "next/link"
 import { FiEdit, FiTrash2 } from 'react-icons/fi'
 import axios from "axios";
+import { useState } from "react";
 
 export default function ProfileEvent ({ event }: any) {
+    const { _id } = event;
+    const [id, setId]: any = useState({
+        id: _id
+    })
+
     const deleteEvent = async () => {
         try {
             // setIsLoading(true);
-            const res = await axios.delete("/api/events/deleteevent", event);
-            console.log(res);
+            const response = await axios.delete('/api/events/updateevent', {
+                data: { id: _id }
+              });
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
