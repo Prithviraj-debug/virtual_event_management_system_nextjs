@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function PostEvent({params}: any) {
     const router = useRouter();
@@ -26,6 +27,11 @@ export default function PostEvent({params}: any) {
             setLoading(true);
             const response = await axios.put("/api/events/updateevent", event);
             console.log("succss", response.data);
+            Swal.fire({
+                title: 'Changes Saved',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
             router.push('/')
         } catch (error: any) {
             console.log(error.message);

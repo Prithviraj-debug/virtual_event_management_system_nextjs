@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import Image from "next/image";
+import Swal from "sweetalert2";
 
 export default function SigupPage() {
     const router = useRouter();
@@ -22,6 +22,11 @@ export default function SigupPage() {
             setLoading(true);
             const response = await axios.post("/api/users/signup", user);
             console.log("succss", response.data);
+            Swal.fire({
+                title: 'Signup Complete',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
             router.push("/login");
         } catch (error: any) {
             console.log(error.message);

@@ -3,13 +3,10 @@
 import Link from "next/link"
 import { FiEdit, FiTrash2 } from 'react-icons/fi'
 import axios from "axios";
-import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function ProfileEvent ({ event }: any) {
     const { _id } = event;
-    const [id, setId]: any = useState({
-        id: _id
-    })
 
     const deleteEvent = async () => {
         try {
@@ -17,6 +14,12 @@ export default function ProfileEvent ({ event }: any) {
             const response = await axios.delete('/api/events/updateevent', {
                 data: { id: _id }
               });
+              Swal.fire({
+                title: 'Event Deleted',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
+              window.location.reload();
             console.log(response);
         } catch (error) {
             console.log(error);

@@ -2,12 +2,11 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useGlobalContext } from "../context/user.context";
 import ProfileEvent from "@/components/profile-event/profile-event.component";
+import Swal from "sweetalert2";
 
 export default function ProfilePage() {
     const router = useRouter();
-    const { userId, username, email } = useGlobalContext();
     
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState({
@@ -22,6 +21,11 @@ export default function ProfilePage() {
         try {
             const response = await axios.get("/api/users/logout");
             console.log("success", response.data);
+            Swal.fire({
+                title: 'Logout',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
             router.push("/login");
         } catch (error) {
             console.log(error.message);

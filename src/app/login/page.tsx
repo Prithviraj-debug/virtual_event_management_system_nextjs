@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -26,6 +27,11 @@ export default function LoginPage() {
             const response = await axios.post("/api/users/login", user);
             console.log(response.data)
             resetFields();
+            Swal.fire({
+                title: 'Logged In',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
             router.push("/");
         } catch (error: any) {
             console.log(error.message);

@@ -11,14 +11,13 @@ export async function DELETE(request: NextRequest) {
 
         console.log(reqBody);
 
-        // Find the existing event by its ID
-        const existingEvent = await Event.findById(id);
-        if (!existingEvent) {
+        // Delete the event using deleteOne
+        const deleteResult = await Event.deleteOne({ _id: id });
+        
+        if (deleteResult.deletedCount === 0) {
             return NextResponse.json({ error: 'Event not found' }, { status: 404 });
         }
 
-        // Delete the event
-        await existingEvent.remove();
         console.log('Event deleted:', id);
 
         return NextResponse.json({
