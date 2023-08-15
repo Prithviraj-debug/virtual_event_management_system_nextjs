@@ -4,13 +4,16 @@ import Link from "next/link"
 import { FiEdit, FiTrash2 } from 'react-icons/fi'
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useState } from 'react'
+import {GridLoader} from "react-spinners"
 
 export default function ProfileEvent ({ event }: any) {
     const { _id } = event;
+    const [loading, setLoading] = useState(false);
 
     const deleteEvent = async () => {
         try {
-            // setIsLoading(true);
+            setLoading(true);
             const response = await axios.delete('/api/events/updateevent', {
                 data: { id: _id }
               });
@@ -25,11 +28,12 @@ export default function ProfileEvent ({ event }: any) {
             console.log(error);
         }
         finally {
-            // setIsLoading(false);
+            setLoading(false);
         }
     }
 
     return (
+        <div>
         <tr className="flex flex-col my-5 bg-slate-500 text-white p-3 rounded-lg hover:bg-slate-950 cursor-pointer">
             <div className="flex items-center justify-between w-full">
                 <h1 className="font-extrabold text-xl border-b-2">
@@ -55,5 +59,11 @@ export default function ProfileEvent ({ event }: any) {
                     )
                 }
         </tr>
+        {
+            loading && (
+                <GridLoader  color="#64748b" />
+            )
+        }
+        </div>
     )
 }
