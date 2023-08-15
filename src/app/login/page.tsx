@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Swal from "sweetalert2";
+import {GridLoader} from "react-spinners";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -54,7 +55,7 @@ export default function LoginPage() {
             <Link href="/">
                 <img src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
             </Link>
-            <div className="w-fit flex flex-col gap-3">
+            <div className={`w-fit flex flex-col gap-3 ${loading ? 'hidden' : ''}`}>
                     <input 
                         id="email"
                         type="email"
@@ -81,7 +82,7 @@ export default function LoginPage() {
 
             {
                  loading && (
-                    <span className="loading loading-infinity loading-lg absolute"></span>
+                    <GridLoader  color="#64748b" />
                 )
             }
         </div>

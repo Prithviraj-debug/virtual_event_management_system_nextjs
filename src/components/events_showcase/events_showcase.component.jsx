@@ -6,15 +6,16 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 export default function Showcase() {
-    const [reloadEvents, setReloadEvents] = useState(false);
     const [eventsData, setEventsData] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [searchField, setSearchField] = useState('');
+    const [loading, setLoading] = useState(false);
 
     eventsData.reverse();
 
     const getAllEvents = async () => {
         try {
+          setLoading(true)
           const res = await axios.get("/api/events/getevents");
           console.log("res: ", res)
           setEventsData(res.data.data)
@@ -22,12 +23,13 @@ export default function Showcase() {
         } catch (error) {
           console.log(error)
         } finally {
+          setLoading(false);
         }
-      }
+    }
 
       useEffect(() => {
         getAllEvents();
-      }, [reloadEvents])
+      }, [])
 
       useEffect(() => {
         const newFilteredEvents = eventsData.filter((event) => {
@@ -35,7 +37,7 @@ export default function Showcase() {
         });
     
         setFilteredEvents(newFilteredEvents);
-      }, [eventsData, searchField, reloadEvents])
+      }, [eventsData, searchField])
 
       const onSearchChange = (event) => {
         const searchFieldString = event.target.value.toLocaleLowerCase();
@@ -46,7 +48,6 @@ export default function Showcase() {
         <div className='flex flex-col items-center'>
           <div>
             <h1 className='font-bold text-3xl my-8'>Upcoming Events...</h1>
-            <button className='btn' onClick={() => setReloadEvents(!reloadEvents)}>Reload</button>
           </div>
             <div className="inline form-control mb-6">
                     <input type="text" placeholder="Search by title or category" className="input input-bordered w-fit md:w-auto bg-white text-black placeholder:text-gray-900 ml-2 text-sm" onChange={onSearchChange} />

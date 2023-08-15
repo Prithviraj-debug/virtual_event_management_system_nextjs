@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "../context/user.context";
 import Swal from "sweetalert2";
+import GridLoader from "react-spinners/GridLoader";
 
 export default function PostEvent() {
     const router = useRouter();
@@ -48,11 +49,11 @@ export default function PostEvent() {
 
     return (
         <div className="sign flex flex-col items-center justify-center min-h-screen py-2 bg-gray-900">
-            <h1 className="text-2xl mb-4 font-bold capitalize">Tell us about your event!</h1>
+            <h1 className="text-2xl mb-4 font-bold capitalize">{loading ? 'Processing' : "Tell us about your event!"}</h1>
             <Link href="/">
                 <img src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
             </Link>
-            <div className="w-fit flex flex-col gap-3">
+            <div className={`w-fit flex flex-col gap-3 ${loading ? 'hidden' : ''}`}>
                     <input 
                         id="eventname"
                         type="text"
@@ -117,6 +118,11 @@ export default function PostEvent() {
                     >Post</button>
 
                 </div>
+                {
+                 loading && (
+                    <GridLoader  color="#64748b" />
+                )
+            }
         </div>
     )
 }

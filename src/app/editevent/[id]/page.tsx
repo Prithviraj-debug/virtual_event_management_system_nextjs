@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { GridLoader } from 'react-spinners';
 
 export default function PostEvent({params}: any) {
     const router = useRouter();
@@ -24,6 +25,7 @@ export default function PostEvent({params}: any) {
 
     const getCurrentEvent = async () => {
         try {
+            setLoading(true);
             const res = await axios.post("/api/events/event", {
                 data: { id: params.id }
               });
@@ -32,13 +34,15 @@ export default function PostEvent({params}: any) {
 
         } catch(error: any) {
             console.log(error)
+        } finally {
+            setLoading(false);
         }
+        
     }
 
     
     const updateEventDetails = async () => {
         try {
-            setLoading(true);
             console.log(event)
             const response = await axios.put("/api/events/updateevent", event);
             console.log("succss", response.data);
@@ -61,11 +65,11 @@ export default function PostEvent({params}: any) {
 
     return (
         <div className="sign flex flex-col items-center justify-center min-h-screen py-2 bg-gray-900">
-            <h1 className="text-2xl mb-4 font-bold capitalize">Edit your event! {params.id}</h1>
+            <h1 className="text-2xl mb-4 font-bold capitalize">{loading ? 'Processing' : "Edit your event!"}</h1>
             <Link href="/">
                 <img src="/back.png" alt="back" className="absolute top-8 left-5 cursor-pointer hover:scale-90 transition-all" />
             </Link>
-            <div className="w-fit flex flex-col gap-3">
+            <div className={`w-fit flex flex-col gap-3 ${loading ? 'hidden' : ''}`}>
                     <input 
                         id="eventname"
                         type="text"
@@ -131,7 +135,7 @@ export default function PostEvent({params}: any) {
 
                 </div>
                 {loading && (
-                    <span className="loading loading-infinity loading-lg absolute"></span>
+                    <GridLoader  color="#64748b" />
                 )}
         </div>
     )

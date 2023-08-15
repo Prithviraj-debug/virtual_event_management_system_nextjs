@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProfileEvent from "@/components/profile-event/profile-event.component";
 import Swal from "sweetalert2";
+import { GridLoader } from 'react-spinners'
 
 export default function ProfilePage() {
     const router = useRouter();
@@ -82,7 +83,7 @@ export default function ProfilePage() {
                 </div>
             </div>
                 {isLoading && (
-                    <span className="loading loading-infinity loading-lg absolute"></span>
+                    <GridLoader  color="#64748b" />
                 )}
         </div>
     )
