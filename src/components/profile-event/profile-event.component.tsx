@@ -36,7 +36,7 @@ export default function ProfileEvent ({ event }: any) {
                     {event.eventname}
                 </h1>
                 <div className="flex gap-5 justify-center items-center">
-                    <Link href={`/editevent/${event._id}`}>
+                    <Link href={`/editevent/${_id}`}>
                         <FiEdit cursor="pointer" className="text-white hover:text-gray-300" size={30} />
                     </Link>
                         <FiTrash2 cursor="pointer" className="text-red-600 hover:text-red-950" size={30} onClick={() => deleteEvent()} />

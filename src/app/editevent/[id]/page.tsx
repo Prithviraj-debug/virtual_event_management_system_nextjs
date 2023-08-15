@@ -10,6 +10,7 @@ export default function PostEvent({params}: any) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
+    const id = params.id;
 
     const [event, setEvent] = useState({
         id: params.id,
@@ -21,10 +22,24 @@ export default function PostEvent({params}: any) {
         category: ""
     });
 
+    const getCurrentEvent = async () => {
+        try {
+            const res = await axios.post("/api/events/event", {
+                data: { id: params.id }
+              });
+              setEvent(res.data.data)
+              console.log(event)
+
+        } catch(error: any) {
+            console.log(error)
+        }
+    }
+
     
     const updateEventDetails = async () => {
         try {
             setLoading(true);
+            console.log(event)
             const response = await axios.put("/api/events/updateevent", event);
             console.log("succss", response.data);
             Swal.fire({
@@ -39,6 +54,10 @@ export default function PostEvent({params}: any) {
             setLoading(false);
         }
     }
+
+    useEffect(() => {
+        getCurrentEvent();
+    }, [])
 
     return (
         <div className="sign flex flex-col items-center justify-center min-h-screen py-2 bg-gray-900">

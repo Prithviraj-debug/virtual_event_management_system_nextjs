@@ -33,12 +33,12 @@ export async function DELETE(request: NextRequest) {
 export async function PUT(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { id, eventname, organizer, date, time, url, category } = reqBody;
+        const { _id, eventname, organizer, date, time, url, category } = reqBody;
 
         console.log(reqBody);
 
         // Find the existing event by its ID
-        const existingEvent = await Event.findById(id);
+        const existingEvent = await Event.findById(_id);
         if (!existingEvent) {
             return NextResponse.json({ error: 'Event not found' }, { status: 404 });
         }

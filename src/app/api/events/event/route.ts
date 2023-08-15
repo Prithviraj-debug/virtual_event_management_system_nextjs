@@ -4,10 +4,11 @@ import { connect } from "@/dbConfig/dbConfig";
 
 connect();
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const {id} = reqBody;
+        const {id} = reqBody.data;
+        console.log(id)
         const event = await Event.findOne({_id: id});
         return NextResponse.json({
             message: "Event found",

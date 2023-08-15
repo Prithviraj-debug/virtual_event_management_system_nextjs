@@ -5,6 +5,7 @@ import { useState } from 'react';
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "../context/user.context";
+import Swal from "sweetalert2";
 
 export default function PostEvent() {
     const router = useRouter();
@@ -31,6 +32,11 @@ export default function PostEvent() {
             event.postedby = userId;
             const response = await axios.post("/api/events/postevent", event);
             setEventAdded(event.eventname)
+            Swal.fire({
+                title: 'Event Posted',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
             console.log("succss", response.data);
             router.push("/");
         } catch (error: any) {
