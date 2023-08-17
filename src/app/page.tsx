@@ -9,6 +9,7 @@ import axios from 'axios';
 
 export default function Home() {
   const { userId, setUserId, username, setUsername, email, setEmail } = useGlobalContext();
+  const [eventsData, setEventsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({
     _id: "",
@@ -30,6 +31,24 @@ export default function Home() {
     }
 }
 
+const getAllEvents = async () => {
+  try {
+    setLoading(true)
+    const res = await axios.get("/api/events/getevents");
+    console.log("res: ", res)
+    setEventsData(res.data.data)
+    console.log("events", eventsData);
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setLoading(false);
+  }
+}
+
+useEffect(() => {
+  getAllEvents();
+}, [])
+
 useEffect(() => {
   getUserDetail();
 }, [])
@@ -48,7 +67,7 @@ useEffect(() => {
     <div className={`bg-white text-black flex flex-col items-center ${loading ? 'hidden' : 'block'}`}>
       <Navbar />
       <img src="/event.jpg" alt='banner' />
-      <Showcase />
+      <Showcase eventsData={eventsData} />
 
       </div>
       {

@@ -5,31 +5,12 @@ import './events_showcase.styles.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-export default function Showcase() {
-    const [eventsData, setEventsData] = useState([]);
+export default function Showcase({ eventsData }) {
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [searchField, setSearchField] = useState('');
     const [loading, setLoading] = useState(false);
 
     eventsData.reverse();
-
-    const getAllEvents = async () => {
-        try {
-          setLoading(true)
-          const res = await axios.get("/api/events/getevents");
-          console.log("res: ", res)
-          setEventsData(res.data.data)
-          console.log("events", eventsData);
-        } catch (error) {
-          console.log(error)
-        } finally {
-          setLoading(false);
-        }
-    }
-
-      useEffect(() => {
-        getAllEvents();
-      }, [])
 
       useEffect(() => {
         const newFilteredEvents = eventsData.filter((event) => {
