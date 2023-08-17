@@ -2,7 +2,6 @@
 
 import Card from './card.component';
 import './events_showcase.styles.css';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 export default function Showcase({ eventsData }) {
@@ -38,7 +37,7 @@ export default function Showcase({ eventsData }) {
                    </div>
             <div className="card-list">
                 {
-                    filteredEvents.map((event, i) => 
+                    eventsData.map((event, i) => 
                         <Card event={event} key={i} />
                     )
                 }
