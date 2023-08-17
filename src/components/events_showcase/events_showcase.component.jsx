@@ -37,7 +37,7 @@ export default function Showcase({ eventsData }) {
                    </div>
             <div className="card-list">
                 {
-                    eventsData.map((event, i) => 
+                    filteredEvents.map((event, i) => 
                         <Card event={event} key={i} />
                     )
                 }
